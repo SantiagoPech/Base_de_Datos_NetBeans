@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author homor
  */
-public class Empleados extends javax.swing.JFrame {
+public final class Empleados extends javax.swing.JFrame {
     DefaultTableModel modelo;
 
     /**
@@ -39,7 +37,7 @@ public class Empleados extends javax.swing.JFrame {
         String[] titulos = {"ID", "P. Apellido", "S. Apellido", "P. Nombre", "S. Nombre", "Fecha de Nacimiento", "Género"};
         String[] registros = new String [7];
         modelo = new DefaultTableModel(null, titulos);
-        String sSQL = "";
+        String sSQL;
         
         conexionMYSQL mysql = new conexionMYSQL();
         Connection cn = mysql.Conectar();
@@ -362,8 +360,8 @@ public class Empleados extends javax.swing.JFrame {
         conexionMYSQL mysql = new conexionMYSQL();
         Connection cn = mysql.Conectar();
         String ap1, ap2, nom1, nom2, fn, gen;
-        String sSQL = "";
-        String mensaje = "";
+        String sSQL;
+        String mensaje;
         
         ap1 = txtPrimerApellido.getText();
         ap2 = txtSegundoApellido.getText();
@@ -451,22 +449,16 @@ public class Empleados extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Empleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Empleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Empleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Empleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Empleados().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Empleados().setVisible(true);
         });
     }
 
